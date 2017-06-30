@@ -24,15 +24,11 @@ body {
 
 }
 
-h1{
-	color: #fff;
-	font-family: "Roboto Mono", Roboto, sans-serif;
+#welcome-message{
+	
 }
 
-h3{
-	color: #fff;
-	font-family: "Roboto Mono", Roboto, sans-serif;
-}
+
 
 button {
 	font-family: "Roboto Mono", Roboto, sans-serif;
