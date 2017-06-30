@@ -4,11 +4,17 @@
 		<meta charset='UTF-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 		<title>Ghost Pong</title>
-		<link rel='stylesheet' href='css/style.css'/>
+		  <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,400italic,500,500italic,700,700italic|Roboto:400,400italic,500,500italic,700,700italic" rel="stylesheet" type="text/css">
+		<link rel='stylesheet' href='css/reset.css'/>
+		<link rel='stylesheet' href='css/normalize.css'/>
+		<link rel='stylesheet' href='css/styles.css'/>
+		<script src="socket.io/socket.io.js"></script>
 		<script src="js/ghost.js"></script>
 	</head>
 	<body>
+		<h1><center>Welcome to Ghost Pong by robakid</center></h1>
 		<img id="welcome" class="back-image" src="images/welcome.gif" alt="welcome">
+	 <center><button>START GAME</button></center>
 		<img id="background" class="back-image" src="images/background.png" alt="background">
 		<img id="ghost" src="images/ghost_transparent.gif" alt="ghost">
 		<canvas id="canvas"></canvas>

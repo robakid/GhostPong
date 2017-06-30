@@ -1,0 +1,94 @@
+canvas {
+	overflow: hidden;
+	display: block;
+	position: fixed;
+	top:0;
+}
+body {
+	background-color: #05022B;
+}
+.back-image {
+	display: block;
+	margin:0 auto;
+}
+#background {
+	display: none;
+	width:100%;
+	bottom:0;
+	position: fixed;
+}
+#ghost{
+	display: none;
+	position: fixed;
+	width:64px;
+
+}
+
+h1{
+	color: #fff;
+	font-family: "Roboto Mono", Roboto, sans-serif;
+}
+
+h3{
+	color: #fff;
+	font-family: "Roboto Mono", Roboto, sans-serif;
+}
+
+button {
+	font-family: "Roboto Mono", Roboto, sans-serif;
+  font-weight: 400;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  line-height: 32px;
+  border-radius: 2px;
+  font-size: 26px;
+  width: 50%;
+  outline:none;
+  border:none;
+  background-color: #fff;
+  height: 100%;
+  display: block;
+  color: #CF61AC;
+  cursor: pointer;
+  text-align: center;
+  padding: 12px;
+  font-family: "Roboto Mono", Roboto, sans-serif;
+  font-weight: 400;
+}
+
+button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.26), 0 4px 15px 0 rgba(0, 0, 0, 0.26);
+  background-color:#ff6a3c;
+}
+/*Mobile Styles*/
+@media only screen and (max-width: 340px){
+	#welcome {
+		position: fixed;
+		width:100%;
+	}
+	#background {
+		height:100%;
+		position: fixed;
+	}
+}
+/*Large mobiles*/
+@media only screen and (min-width: 341px) and (max-width: 484px){
+	#welcome {
+		position: fixed;
+		width:100%;
+	}
+	#background {
+		height:100%;
+		position: fixed;
+	}
+}
+/*Tablets*/
+@media only screen and (min-width: 485px) and (max-width: 800px){
+	#welcome {
+		position: fixed;
+		width:100%;
+	}
+	#background {
+		height:100%;
+		position: fixed;
+	}
+}

@@ -21,22 +21,22 @@ var App = (function(){
 				for(i=0;i<len;i++){
 					mouse.touches[i] = {x:touches[i].pageX, y:touches[i].pageY};
 					if(mouse.touches[i].x < width/2){
-						//left goalDoor
-						goalDoors.left.y = mouse.touches[i].y;
+						//left goaldoor
+						goaldoors.left.y = mouse.touches[i].y;
 					} else {
-						//right goalDoor
-						goalDoors.right.y = mouse.touches[i] .y;
+						//right goaldoor
+						goaldoors.right.y = mouse.touches[i] .y;
 					}
 				}
 			} else {
 				mouse.isDown = true;
 				mouse.downPos = {x:e.pageX,y:e.pageY};
 				if(mouse.downPos.x < width/2){
-					//left goalDoor
-					goalDoors.left.y = mouse.downPos.y;
+					//left goaldoor
+					goaldoors.left.y = mouse.downPos.y;
 				} else {
-					//right goalDoor
-					goalDoors.right.y = mouse.downPos.y;
+					//right goaldoor
+					goaldoors.right.y = mouse.downPos.y;
 				}
 			}
 
@@ -50,22 +50,22 @@ var App = (function(){
 				for(i=0;i<len;i++){
 					mouse.touches[i] = {x:touches[i].pageX, y:touches[i].pageY};
 					if(mouse.touches[i].x < width/2){
-						//left goalDoor
-						goalDoors.left.y = mouse.touches[i].y;
+						//left goaldoor
+						goaldoors.left.y = mouse.touches[i].y;
 					} else {
-						//right goalDoor
-						goalDoors.right.y = mouse.touches[i] .y;
+						//right goaldoor
+						goaldoors.right.y = mouse.touches[i] .y;
 					}
 				}
 			} else {
 				mouse.movePos = {x:e.pageX,y:e.pageY};
 				if(mouse.isDown){
 					if(mouse.movePos.x < width/2){
-						//left goalDoor
-						goalDoors.left.y = mouse.movePos.y;
+						//left goaldoor
+						goaldoors.left.y = mouse.movePos.y;
 					} else {
-						//right goalDoor
-						goalDoors.right.y = mouse.movePos.y;
+						//right goaldoor
+						goaldoors.right.y = mouse.movePos.y;
 					}
 				}
 			}
@@ -96,7 +96,7 @@ var App = (function(){
 			document.body.style.backgroundColor = '#1D1D1D';
 			background.style.display = 'block';
 			ghost.style.display = 'block';
-			b = {x:width/2, y:height/2, angle:updateAngle(), speed: 5};
+			b = {x:width/2, y:height/2, angle:updateAngle(), speed: 4};
 			ghost.style.left = (width/2-ghost.width/2)+'px';
 			ghost.style.top = (height/2-ghost.height/2)+'px';
 			window.addEventListener('touchstart', inputListeners.touchStart, false);
@@ -113,14 +113,14 @@ var App = (function(){
 				}
 			}
 		}
-		var goalDoors;
-		function initgoalDoors(){
-			goalDoors = {
-				left:{x:10,y:height/2, width:10, height: height*0.125, size:height*0.125, score:0},
-				right:{x:width-10,y:height/2, width:10, height: height*0.125, size:height*0.125, score:0}
+		var goaldoors;
+		function initgoaldoors(){
+			goaldoors = {
+				left:{x:10,y:height/2, width:4, height: height*0.125, size:height*0.125, score:0},
+				right:{x:width-10,y:height/2, width:4, height: height*0.125, size:height*0.125, score:0}
 			};
 		}
-		var b = {x:width/2, y:height/2, angle:updateAngle(), speed: 5};
+		var b = {x:width/2, y:height/2, angle:updateAngle(), speed: 4};
 		function updateAngle(){
 			var bln = Math.floor(Math.random()*2);
 			if(bln == 0){
@@ -141,41 +141,74 @@ var App = (function(){
 			}
 			return blnHit;
 		};
+		var hits = 0;
 		function updateGame(){
 			b.x += Math.sin(b.angle)*b.speed;
 			b.y += Math.cos(b.angle)*b.speed;
-			if(b.angle < 0){
+			/*if(b.angle < 0){
 				if(b.y < 0){
-					b.angle += Math.PI/2;
+					b.y = 10;
+					hits ++;
+					if(hits%2==0){
+						b.angle += Math.PI/2;
+					} else {
+						b.angle -= Math.PI/2;
+					}
 				}
 				if(b.y > height){
-					b.angle -= Math.PI/2;
+					b.y = height-10;
+					hits ++;
+					if(hits%2==0){
+						b.angle -= Math.PI/2;
+					} else {
+						b.angle += Math.PI/2;
+					}
 				}
 			} else if(b.angle > 0){
 				if(b.y < 0){
-					b.angle -= Math.PI/2;
+					b.y = 10;
+					hits ++;
+					if(hits%2==0){
+						b.angle -= Math.PI/2;
+					} else {
+						b.angle += Math.PI/2;
+					}
 				}
 				if(b.y > height){
-					b.angle += Math.PI/2;
+					b.y = height-10;
+					hits++;
+					if(hits%2==0){
+						b.angle += Math.PI/2;
+					} else {
+						b.angle -= Math.PI/2;
+					}
 				}
+			}*/
+			if(b.y < 0){
+				b.y = 10;
+				b.angle = Math.PI-b.angle;
+			}
+			if(b.y > height){
+				b.y = height-10;
+				b.angle = Math.PI-b.angle;
 			}
 			if(b.x < 0){
-				goalDoors.right.score ++;
+				goaldoors.right.score ++;
 				b.x = width/2;
 				b.y = height/2;
 				b.angle = updateAngle();
 			} else if(b.x > width){
-				goalDoors.left.score ++;
+				goaldoors.left.score ++;
 				b.x = width/2;
 				b.y = height/2;
 				b.angle = updateAngle();
 			}
 
-			if(pointHitsRect(b, {x:goalDoors.left.x-2, y:goalDoors.left.y-goalDoors.left.height/2, width:10, height:goalDoors.left.height})){
+			if(pointHitsRect(b, {x:goaldoors.left.x-2, y:goaldoors.left.y-goaldoors.left.height/2, width:4, height:goaldoors.left.height})){
 				b.angle = -b.angle;
 				b.angle += Math.random()*Math.PI*0.1-Math.PI*0.05;
 			}
-			if(pointHitsRect(b, {x:goalDoors.right.x-2, y:goalDoors.right.y-goalDoors.right.height/2, width:10, height:goalDoors.right.height})){
+			if(pointHitsRect(b, {x:goaldoors.right.x-2, y:goaldoors.right.y-goaldoors.right.height/2, width:4, height:goaldoors.right.height})){
 				b.angle = -b.angle;
 				b.angle += Math.random()*Math.PI*0.1-Math.PI*0.05;
 			}
@@ -183,10 +216,10 @@ var App = (function(){
 			ghost.style.top = (b.y-ghost.height/2)+'px';
 		}
 		function drawScores(){
-			var scoreTextRight = 'Ghost Player 1 score: '+goalDoors.right.score;
+			var scoreTextRight = 'Ghost score: '+goaldoors.right.score;
 			ctx.font = "20px Georgia";
 			ctx.fillStyle = 'rgb(240,240,240)';
-			ctx.fillText('Ghost Player 2 score: '+goalDoors.left.score, 24, 24);
+			ctx.fillText('Cat score: '+goaldoors.left.score, 24, 24);
 			ctx.fillText(scoreTextRight, width-ctx.measureText(scoreTextRight).width-24, 24);
 		}
 		function drawDivider(){
@@ -199,7 +232,7 @@ var App = (function(){
 			ctx.closePath();
 			ctx.stroke();
 		}
-		function drawgoalDoor(p){
+		function drawgoaldoor(p){
 			ctx.strokeStyle = 'rgb(255,255,230)';
 			ctx.setLineDash([]);
 			ctx.lineWidth = 4;
@@ -212,8 +245,8 @@ var App = (function(){
 		function drawGame(){
 			ctx.clearRect(0,0,width,height);
 			drawDivider();
-			drawgoalDoor(goalDoors.left);
-			drawgoalDoor(goalDoors.right);
+			drawgoaldoor(goaldoors.left);
+			drawgoaldoor(goaldoors.right);
 			drawScores();
 		}
 		var allowLoop = false;
@@ -237,7 +270,7 @@ var App = (function(){
 			allowLoop = false;
 		}
 		function clickedWelcome(){
-			initgoalDoors();
+			initgoaldoors();
 			changeState('game');
 			beginLoop();
 			canvas.removeEventListener('click', clickedWelcome, false);
